@@ -1,0 +1,16 @@
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+pre > code, code {
+  border-radius: 4px;
+  font-family: "Source Code Pro", monospace;
+}
+
+.icon {
+  font-size: 2em;
+}
+
+.icon:hover {
+  text-decoration: none;
+}

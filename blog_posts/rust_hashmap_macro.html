@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rust Hashmap Macro | SL-Lee</title>
+
+  <!-- Fonts -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/source-code-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/source-sans-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/source-serif-pro.css" />
+  <link rel="stylesheet" type="text/css" href="../assets/css/icofont.min.css" />
+
+  <!-- Bootstrap styles -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css" />
+
+  <!-- highlight.js styles -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/solarized-dark.css" />
+
+  <!-- user styles -->
+  <link rel="stylesheet" type="text/css" href="../assets/css/styles.css" />
+
+  <!-- Bootstrap scripts -->
+  <script src="../assets/js/jquery-3.5.1.min.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+  <!-- highlight.js scripts -->
+  <script src="../assets/js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="../index.html">SL-Lee</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-links">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../about.html">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <h1>Rust Hashmap Macro</h1>
+    <p>A hashmap macro to construct a hashmap quickly, similar to the <code>vec!</code> macro</p>
+    <p class="text-secondary">2020-10-06 20:04</p>
+    <hr />
+    <p>Definition:</p>
+    <pre><code class="lang-rust">use std::collections::HashMap;
+
+#[macro_export]
+macro_rules! hashmap {
+    ( $key_type:ty; $value_type:ty ) => {
+        HashMap::<$key_type, $value_type>::new()
+    };
+    ( $( $key:expr => $value:expr ),+ $(,)? ) => {
+        {
+            let mut hashmap = HashMap::new();
+            $( hashmap.insert($key, $value); )*
+            hashmap
+        }
+    };
+}</code></pre>
+    <p>Example usage:</p>
+    <pre><code class="lang-rust">// Create a new, empty hashmap where its keys are `String`s and
+// its values are `u32`s
+let mut hashmap1 = hashmap!{String; u32};
+
+// Create a new hashmap and insert two pairs of keys and values to it
+let mut hashmap2 = hashmap!{
+    "key1".to_string() => "value1".to_string(),
+    "key2".to_string() => "value2".to_string(),
+};</code></pre>
+    <footer class="border-top mt-4 pt-3 pb-3 text-center">
+      <h5 class="text-secondary">Contact</h5>
+      <a class="icon icofont-twitter text-secondary" href="https://twitter.com/sl_lee99" title="Twitter"></a>
+      <a class="icon icofont-github text-secondary" href="https://github.com/SL-Lee" title="GitHub"></a>
+    </footer>
+  </div>
+</body>
+</html>
